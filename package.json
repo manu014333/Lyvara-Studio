@@ -1,0 +1,106 @@
+{
+  "name": "lyvara-studio",
+  "version": "1.0.0",
+  "productName": "Lyvara Studio",
+  "description": "Real-time AI face transformation, voice FX, and OBS integration for live streamers.",
+  "type": "module",
+  "main": "main.js",
+  "author": {
+    "name": "Lyvara Studio",
+    "email": "hello@lyvarastudio.io",
+    "url": "https://lyvarastudio.io"
+  },
+  "scripts": {
+    "start": "electron .",
+    "build:win": "electron-builder --win --x64",
+    "build:mac": "electron-builder --mac --x64 --arm64",
+    "build:all": "electron-builder --win --mac",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "build": {
+    "appId": "io.lyvarastudio.app",
+    "productName": "Lyvara Studio",
+    "copyright": "Copyright \u00a9 2026 Lyvara Studio",
+    "asar": true,
+    "files": [
+      "main.js",
+      "index.html",
+      "preload.cjs",
+      "package.json",
+      "assets/icons/**/*",
+      "node_modules/**/*",
+      "!node_modules/.cache/**/*",
+      "!node_modules/.bin/**/*",
+      "!admin.js",
+      "!preload-admin.cjs",
+      "!admin/**/*",
+      "!landing.html",
+      "!worker.js",
+      "!wrangler.toml",
+      "!.github/**/*",
+      "!.env",
+      "!.env.*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icons/icon.ico",
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowDirChange": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "installerIcon": "assets/icons/icon.ico",
+      "uninstallerIcon": "assets/icons/icon.ico",
+      "installerHeaderIcon": "assets/icons/icon.ico",
+      "deleteAppDataOnUninstall": false
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "icon": "assets/icons/icon.icns",
+      "category": "public.app-category.utilities",
+      "darkModeSupport": true
+    },
+    "dmg": {
+      "title": "${productName} ${version}",
+      "window": {
+        "width": 540,
+        "height": 380
+      }
+    },
+    "publish": null
+  },
+  "dependencies": {
+    "electron": "^31.0.0",
+    "@supabase/supabase-js": "^2.39.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "ws": "^8.16.0"
+  },
+  "devDependencies": {
+    "electron-builder": "^24.9.1"
+  }
+}
